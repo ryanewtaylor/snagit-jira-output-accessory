@@ -4,6 +4,7 @@
     using System.Runtime.InteropServices;
     using System.Text;
     using System.Windows.Forms;
+    using SnagitJiraOutputAccessory.Commands;
     using SNAGITLib;
 
     [ClassInterface(ClassInterfaceType.None)]
@@ -11,6 +12,7 @@
     public class SnagitJiraOutputButton : MarshalByRefObject, IComponentInitialize, IOutput, IOutputMenu, IComponentWantsCategoryPreferences
     {
         private ISnagIt _snagit;
+        private CommandFactory _commandFactory;
         
         public void InitializeComponent(object pExtensionHost, IComponent pComponent, componentInitializeType initType)
         {
@@ -27,27 +29,23 @@
 
         public void Output()
         {
-            MessageBox.Show("click!");
+            _commandFactory.CreateDefaultCommand().Execute();
         }
 
         public string GetOutputMenuData()
         {
-            StringBuilder menu = new StringBuilder();
-            menu.Append("<menu>");
-            menu.AppendFormat("<menuitem id=\"{0}\" label=\"{1}\" />", "UploadToNewIssue", "Upload to New Issue");
-            menu.AppendFormat("<menuitem id=\"{0}\" label=\"{1}\" />", "UploadToExistingIssue", "Upload to Existing Issue");
-            menu.Append("</menu>");
-            return menu.ToString();
+            var formatter = new SnagitMenuFormatter();
+            return formatter.Format();
         }
 
         public void SelectOutputMenuItem(string pStrID)
         {
-            // TODO: Implementation
+            _commandFactory.CreateCommand(pStrID).Execute();
         }
 
         public void SetComponentCategoryPreferences(SnagItOutputPreferences pIComponentCategoryPreferences)
         {
-            // TODO: Implementation
+            _commandFactory = new CommandFactory();
         }
     }
 }
