@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using SnagitJiraOutputAccessory.Commands;
-
-namespace SnagitJiraOutputAccessory
+﻿namespace SnagitJiraOutputAccessory
 {
+    using System.Text;
+    using SnagitJiraOutputAccessory.Commands;
+
     public class SnagitMenuFormatter
     {
         public string Format()

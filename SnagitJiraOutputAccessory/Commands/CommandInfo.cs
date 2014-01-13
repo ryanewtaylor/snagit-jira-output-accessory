@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace SnagitJiraOutputAccessory.Commands
+﻿namespace SnagitJiraOutputAccessory.Commands
 {
+    using System;
+
     public class CommandInfo
     {
         private readonly string _id;

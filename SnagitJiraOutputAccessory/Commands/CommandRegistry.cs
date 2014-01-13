@@ -1,8 +1,8 @@
 ﻿namespace SnagitJiraOutputAccessory.Commands
 {
     using System;
-    using System.Linq;
     using System.Collections.Generic;
+    using System.Linq;
 
     public static class CommandRegistry
     {
