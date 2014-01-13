@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+  <output buttontype="splitbuttonmenu">
+  <shorttitle>Jira</shorttitle>
+  <longtitle>Jira Output</longtitle>
+  <description>Send a capture to Jira</description>
+  <icon>Jira.ico</icon>
+</output>

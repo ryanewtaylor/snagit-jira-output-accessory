@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package id="{55A50CAA-D9E3-4239-8B02-D6D2A396F4AF}" code="SnagitJiraOutputAccessory.dll">
+  <version>0.1.0</version>
+  <title>Jira SnagIt Accessory</title>
+  <icon>Jira.ico</icon>
+  <description>Send your SnagIt capture to Jira</description>
+  <author>Ryan Taylor</author>
+  <components>
+     <component name="SnagitJiraOutputAccessory" id="{D3B2FCA3-7A2C-4AF9-86D4-2E542118E8F8}">
+     <category name="Output" id="{1F75BD16-21A8-11DB-9622-00E08161165F}"/>
+    </component>
+  </components>
+</package>
