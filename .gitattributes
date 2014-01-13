@@ -1,0 +1,42 @@
+# Obtained by a combination of 
+# https://github.com/Danimoth/gitattributes
+# http://davidlaing.com/2012/09/19/customise-your-gitattributes-to-become-a-git-ninja/
+# https://help.github.com/articles/dealing-with-line-endings
+# http://timclem.wordpress.com/2012/03/01/mind-the-end-of-your-line/
+# https://www.kernel.org/pub/software/scm/git/docs/gitattributes.html
+
+### Auto detect text files and perform LF normalization
+* text=auto
+
+### Visual Studio
+*.cs      text diff=csharp
+*.sln     text eol=crlf merge=union
+*.csproj  text eol=crlf merge=union
+*.vbproj  text eol=crlf merge=union
+*.fsproj  text eol=crlf merge=union
+*.dbproj  text eol=crlf merge=union
+*.msbuild text
+*.dll binary
+
+### Standard to msysgit
+# Not sure what this does or what these should be so I'm ignoring them for now
+# *.doc  diff=astextplain
+# *.DOC  diff=astextplain
+# *.docx diff=astextplain
+# *.DOCX diff=astextplain
+# *.dot  diff=astextplain
+# *.DOT  diff=astextplain
+# *.pdf  diff=astextplain
+# *.PDF  diff=astextplain
+# *.rtf  diff=astextplain
+# *.RTF  diff=astextplain
+
+### Misc Text Files
+*.txt text
+*.md  text
+
+### Misc Binary Files
+*.png binary
+*.jpg binary
+*.gif binary
+*.zip binary
