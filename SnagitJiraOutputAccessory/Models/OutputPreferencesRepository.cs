@@ -1,10 +1,7 @@
 ﻿namespace SnagitJiraOutputAccessory.Models
 {
     using System;
-    using System.Collections.Generic;
     using System.IO;
-    using System.Linq;
-    using System.Text;
     using Newtonsoft.Json;
 
     public class OutputPreferencesRepository
@@ -24,6 +21,7 @@
             {
                 String settingsAsJson = File.ReadAllText(filePath);
                 OutputPreferences settings = JsonConvert.DeserializeObject<OutputPreferences>(settingsAsJson);
+                settings.Decrypt();
                 return settings;
             }
 
@@ -38,6 +36,8 @@
             }
 
             String filePath = Path.Combine(_dir, _fileName);
+
+            outputPreferences.Encrypt();
             String settingsAsJson = JsonConvert.SerializeObject(outputPreferences, Formatting.Indented);
             File.WriteAllText(filePath, settingsAsJson);
         }

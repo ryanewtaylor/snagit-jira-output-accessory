@@ -38,6 +38,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -54,6 +55,7 @@
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Models\OutputPreferences.cs" />
     <Compile Include="Models\OutputPreferencesRepository.cs" />
+    <Compile Include="Models\StringExtensions.cs" />
     <Compile Include="Package.cs" />
     <Compile Include="SnagitJiraOutputButton.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
