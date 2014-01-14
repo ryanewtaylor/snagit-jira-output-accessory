@@ -6,21 +6,23 @@
 
     public class ConfigureSettingsCommand : ICommand
     {
+        private OutputPreferencesRepository _outputPreferencesRepo;
+
+        public ConfigureSettingsCommand(OutputPreferencesRepository outputPreferencesRepo)
+        {
+            _outputPreferencesRepo = outputPreferencesRepo;
+        }
+
         public void Execute()
         {
-            OutputPreferences prefs = new OutputPreferences
-            {
-                JiraRootUrl = "https://fortressofsolitude.com/",
-                Username = "clarkkent",
-                Password = "********"
-            };
-
+            var prefs = _outputPreferencesRepo.Read();
             PreferencesForm preferencesForm = new PreferencesForm(prefs);
             preferencesForm.StartPosition = FormStartPosition.CenterParent;
 
             if (preferencesForm.ShowDialog() == DialogResult.OK)
             {
                 var newPrefs = preferencesForm.OutputPreferences;
+                _outputPreferencesRepo.Write(newPrefs);
             }
         }
     }

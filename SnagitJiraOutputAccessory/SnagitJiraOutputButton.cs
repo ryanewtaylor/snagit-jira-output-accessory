@@ -43,7 +43,7 @@
 
         public void SetComponentCategoryPreferences(SnagItOutputPreferences pIComponentCategoryPreferences)
         {
-            _commandFactory = new CommandFactory();
+            _commandFactory = new CommandFactory(_snagit, pIComponentCategoryPreferences);
         }
     }
 }
