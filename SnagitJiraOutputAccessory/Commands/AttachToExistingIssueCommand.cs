@@ -2,6 +2,7 @@
 {
     using System.Windows.Forms;
     using SnagitJiraOutputAccessory.Models;
+    using SnagitJiraOutputAccessory.Views;
 
     public class AttachToExistingIssueCommand : ICommand
     {
@@ -14,7 +15,13 @@
 
         public void Execute()
         {
-            MessageBox.Show("TODO: AttachToExistingIssueCommand");
+            var prefs = _outputPreferencesRepo.Read();
+
+            AttachToExistingIssueForm form = new AttachToExistingIssueForm();
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                string issueKey = form.IssueKey;
+            }
         }
     }
 }
