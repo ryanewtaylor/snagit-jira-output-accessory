@@ -18,7 +18,6 @@
             try
             {
                 _snagit = pExtensionHost as ISnagIt;
-                MessageBox.Show("initialized!");
             }
             catch (Exception ex)
             {
