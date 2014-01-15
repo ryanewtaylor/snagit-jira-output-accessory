@@ -3,12 +3,13 @@
     using System.Windows.Forms;
     using SnagitJiraOutputAccessory.Models;
     using SnagitJiraOutputAccessory.Views;
+    using SNAGITLib;
 
     public class ConfigureSettingsCommand : ICommand
     {
         private OutputPreferencesRepository _outputPreferencesRepo;
 
-        public ConfigureSettingsCommand(OutputPreferencesRepository outputPreferencesRepo)
+        public ConfigureSettingsCommand(ISnagIt snagit, OutputPreferencesRepository outputPreferencesRepo)
         {
             _outputPreferencesRepo = outputPreferencesRepo;
         }

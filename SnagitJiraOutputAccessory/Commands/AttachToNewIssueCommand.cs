@@ -2,13 +2,16 @@
 {
     using System.Windows.Forms;
     using SnagitJiraOutputAccessory.Models;
+    using SNAGITLib;
 
     public class AttachToNewIssueCommand : ICommand
     {
+        private readonly ISnagIt _snagit;
         private OutputPreferencesRepository _outputPreferencesRepo;
 
-        public AttachToNewIssueCommand(OutputPreferencesRepository outputPreferencesRepo)
+        public AttachToNewIssueCommand(ISnagIt snagit, OutputPreferencesRepository outputPreferencesRepo)
         {
+            _snagit = snagit;
             _outputPreferencesRepo = outputPreferencesRepo;
         }
 

@@ -18,7 +18,7 @@ namespace SnagitJiraOutputAccessory.Commands
             var repo = new OutputPreferencesRepository(_componentPreferences.PreferencesDir);
 
             return (ICommand)System.Activator.CreateInstance(
-                CommandRegistry.GetCommandType(commandId), repo);
+                CommandRegistry.GetCommandType(commandId), _snagit, repo);
         }
 
         public ICommand CreateDefaultCommand()
