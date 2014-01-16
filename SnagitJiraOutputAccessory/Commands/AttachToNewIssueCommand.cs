@@ -38,7 +38,7 @@
                 string issueKey = issue.Key.Value;
 
                 ISnagItImageDocumentSave saveableDoc = _snagit.SelectedDocument as ISnagItImageDocumentSave;
-                string tempFileName = Path.GetFileNameWithoutExtension(Path.GetTempFileName()) + ".png";
+                string tempFileName = Path.ChangeExtension(Path.GetTempFileName(), ".png");
                 saveableDoc.SaveToFile(tempFileName, snagImageFileType.siftPNG, null);
 
                 issue.AddAttachment(tempFileName);
