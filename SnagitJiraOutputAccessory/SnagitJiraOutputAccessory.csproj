@@ -74,6 +74,12 @@
     <Compile Include="Views\AttachToExistingIssueForm.Designer.cs">
       <DependentUpon>AttachToExistingIssueForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\AttachToNewIssueForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\AttachToNewIssueForm.Designer.cs">
+      <DependentUpon>AttachToNewIssueForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\PreferencesForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -115,6 +121,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Views\AttachToExistingIssueForm.resx">
       <DependentUpon>AttachToExistingIssueForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\AttachToNewIssueForm.resx">
+      <DependentUpon>AttachToNewIssueForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\PreferencesForm.resx">
       <DependentUpon>PreferencesForm.cs</DependentUpon>
