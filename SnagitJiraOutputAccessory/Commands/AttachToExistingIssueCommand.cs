@@ -44,16 +44,10 @@
                 string issueUrl = string.Format("{0}browse/{1}", jira.Url, issueKey);
                 Clipboard.SetText(issueUrl);
 
-                NotifyIcon notifyIcon = new NotifyIcon();
-                notifyIcon.Visible = true;
-                notifyIcon.Icon = SystemIcons.Information;
-                notifyIcon.BalloonTipTitle = string.Format("{0} attached to {1}", Path.GetFileName(tempFileName), issueKey);
-                notifyIcon.BalloonTipText = issueKey;
-                notifyIcon.ShowBalloonTip(1000);
-                notifyIcon.BalloonTipClicked += (object sender, System.EventArgs e) =>
-                {
-                    Process.Start(issueUrl);
-                };
+                string title = string.Format("{0} attached to {1}", Path.GetFileName(tempFileName), issueKey);
+                ICommand openWebPageCommand = new OpenWebPageCommand(issueUrl);
+                UploadCompleteNotification notifier = new UploadCompleteNotification();
+                notifier.Notify(title, issueUrl, openWebPageCommand);
             }
         }
     }
