@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using SnagitJiraOutputAccessory.Models;
 
 namespace SnagitJiraOutputAccessory.Views
 {
@@ -15,16 +11,19 @@ namespace SnagitJiraOutputAccessory.Views
         public string ProjectKey;
         public string IssueType;
         public string IssueSummary;
+        public readonly IEnumerable<Project> _projects;
 
-        public AttachToNewIssueForm()
+        public AttachToNewIssueForm(IEnumerable<Project> projects)
         {
             InitializeComponent();
+
+            _projects = projects;
         }
 
         private void attachBtn_Click(object sender, EventArgs e)
         {
-            ProjectKey = projectTxt.Text;
-            IssueType = issueTypeTxt.Text;
+            ProjectKey = ((Project)projectLst.SelectedItem).Key;
+            IssueType = ((IssueType)issueTypeLst.SelectedItem).Name;
             IssueSummary = summaryTxt.Text;
             Close();
         }
@@ -35,6 +34,24 @@ namespace SnagitJiraOutputAccessory.Views
             IssueType = "";
             IssueSummary = "";
             Close();
+        }
+
+        private void AttachToNewIssueForm_Load(object sender, EventArgs e)
+        {
+            projectBindingSrc.DataSource = _projects;
+            projectLst.DisplayMember = "Name";
+            projectLst.ValueMember = "Key";
+            projectLst.DataSource = projectBindingSrc;
+
+            issueTypeBindingSrc.DataSource = _projects.First().IssueTypes;
+            issueTypeLst.DisplayMember = "Name";
+            issueTypeLst.ValueMember = "Name";
+            issueTypeLst.DataSource = issueTypeBindingSrc;
+        }
+
+        private void projectLst_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            issueTypeBindingSrc.DataSource = ((Project)projectLst.SelectedItem).IssueTypes;
         }
     }
 }

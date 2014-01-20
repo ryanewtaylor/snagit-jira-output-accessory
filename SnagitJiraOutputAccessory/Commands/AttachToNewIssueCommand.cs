@@ -1,5 +1,7 @@
 ﻿namespace SnagitJiraOutputAccessory.Commands
 {
+    using System.Collections;
+    using System.Collections.Generic;
     using System.IO;
     using System.Windows.Forms;
     using Atlassian.Jira;
@@ -22,14 +24,36 @@
         {
             var prefs = _outputPreferencesRepo.Read();
 
-            AttachToNewIssueForm form = new AttachToNewIssueForm();
+            Jira jira = new Jira(prefs.JiraRootUrl, prefs.Username, prefs.Password);
+            
+            // Eventually use a cache here so we don't always fetch
+            // new entries every time we ask for a new ticket
+            IList<Models.Project> myProjects = new List<Models.Project>();
+
+            if (myProjects.Count <= 0)
+            {
+                var projects = jira.GetProjects();
+                foreach (var project in projects)
+                {
+                    Models.Project myProject = new Models.Project(project.Id, project.Key, project.Name);
+                    var issueTypes = jira.GetIssueTypes(myProject.Key);
+                    foreach (var issueType in issueTypes)
+                    {
+                        Models.IssueType myIssuetype = new Models.IssueType(issueType.Id, issueType.Name, "", false);
+                        myProject.AddIssueType(myIssuetype);
+                    }
+
+                    myProjects.Add(myProject);
+                }
+            }
+
+            AttachToNewIssueForm form = new AttachToNewIssueForm(myProjects);
             if (form.ShowDialog() == DialogResult.OK)
             {
                 string projectKey = form.ProjectKey;
                 string issueType = form.IssueType;
                 string issueSummary = form.IssueSummary;
 
-                Jira jira = new Jira(prefs.JiraRootUrl, prefs.Username, prefs.Password);
                 Issue issue = jira.CreateIssue(projectKey);
                 issue.Type = issueType;
                 issue.Summary = issueSummary;
