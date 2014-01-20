@@ -98,7 +98,7 @@
             this.summaryTxt.Multiline = true;
             this.summaryTxt.Name = "summaryTxt";
             this.summaryTxt.Size = new System.Drawing.Size(288, 57);
-            this.summaryTxt.TabIndex = 7;
+            this.summaryTxt.TabIndex = 3;
             // 
             // projectLst
             // 
@@ -106,7 +106,7 @@
             this.projectLst.Location = new System.Drawing.Point(90, 17);
             this.projectLst.Name = "projectLst";
             this.projectLst.Size = new System.Drawing.Size(288, 21);
-            this.projectLst.TabIndex = 8;
+            this.projectLst.TabIndex = 1;
             this.projectLst.SelectionChangeCommitted += new System.EventHandler(this.projectLst_SelectionChangeCommitted);
             // 
             // issueTypeLst
@@ -115,7 +115,7 @@
             this.issueTypeLst.Location = new System.Drawing.Point(90, 45);
             this.issueTypeLst.Name = "issueTypeLst";
             this.issueTypeLst.Size = new System.Drawing.Size(126, 21);
-            this.issueTypeLst.TabIndex = 9;
+            this.issueTypeLst.TabIndex = 2;
             // 
             // AttachToNewIssueForm
             // 
