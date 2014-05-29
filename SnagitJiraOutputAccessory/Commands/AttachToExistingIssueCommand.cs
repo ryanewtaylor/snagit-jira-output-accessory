@@ -25,12 +25,13 @@
         {
             var prefs = _outputPreferencesRepo.Read();
 
-            AttachToExistingIssueForm form = new AttachToExistingIssueForm();
+            Jira jira = new Jira(prefs.JiraRootUrl, prefs.Username, prefs.Password);
+
+            AttachToExistingIssueForm form = new AttachToExistingIssueForm(jira);
             if (form.ShowDialog() == DialogResult.OK)
             {
                 string issueKey = form.IssueKey;
-
-                Jira jira = new Jira(prefs.JiraRootUrl, prefs.Username, prefs.Password);
+                
                 Issue issue = (from i in jira.Issues
                              where i.Key == issueKey
                              select i).First();
