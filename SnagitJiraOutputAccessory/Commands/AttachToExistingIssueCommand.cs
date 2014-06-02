@@ -1,12 +1,8 @@
 ﻿namespace SnagitJiraOutputAccessory.Commands
 {
-    using System.Diagnostics;
-    using System.Drawing;
-    using System.IO;
-    using System.Linq;
-    using System.Windows.Forms;
     using Atlassian.Jira;
     using SnagitJiraOutputAccessory.Models;
+    using SnagitJiraOutputAccessory.ViewModels;
     using SnagitJiraOutputAccessory.Views;
     using SNAGITLib;
 
@@ -24,32 +20,13 @@
         public void Execute()
         {
             var prefs = _outputPreferencesRepo.Read();
-
             Jira jira = new Jira(prefs.JiraRootUrl, prefs.Username, prefs.Password);
 
-            AttachToExistingIssueForm form = new AttachToExistingIssueForm(jira);
-            if (form.ShowDialog() == DialogResult.OK)
-            {
-                string issueKey = form.IssueKey;
-                
-                Issue issue = (from i in jira.Issues
-                             where i.Key == issueKey
-                             select i).First();
-
-                ISnagItImageDocumentSave saveableDoc = _snagit.SelectedDocument as ISnagItImageDocumentSave;
-                string tempFileName = Path.ChangeExtension(Path.GetTempFileName(), ".png");
-                saveableDoc.SaveToFile(tempFileName, snagImageFileType.siftPNG, null);
-
-                issue.AddAttachment(tempFileName);
-
-                string issueUrl = string.Format("{0}browse/{1}", jira.Url, issueKey);
-                Clipboard.SetText(issueUrl);
-
-                string title = string.Format("{0} attached to {1}", Path.GetFileName(tempFileName), issueKey);
-                ICommand openWebPageCommand = new OpenWebPageCommand(issueUrl);
-                UploadCompleteNotification notifier = new UploadCompleteNotification();
-                notifier.Notify(title, issueUrl, openWebPageCommand);
-            }
+            AttachToExistingIssueView view = new AttachToExistingIssueView();
+            var windowHelper = new System.Windows.Interop.WindowInteropHelper(view);
+            windowHelper.Owner = (System.IntPtr)(_snagit.TopLevelHWnd);
+            view.DataContext = new AttachToExistingIssueViewModel(_snagit, jira);
+            view.ShowDialog();
         }
     }
 }
