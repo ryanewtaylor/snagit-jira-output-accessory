@@ -134,16 +134,7 @@
             ISnagItImageDocumentSave saveableDoc = _snagit.SelectedDocument as ISnagItImageDocumentSave;
             string tempFileName = Path.ChangeExtension(Path.GetTempFileName(), ".png");
             saveableDoc.SaveToFile(tempFileName, snagImageFileType.siftPNG, null);
-
-            // convert image on disk to byte array (should this be an extension method?)
-            Image image = Image.FromFile(tempFileName);
-            byte[] imageBytes = null;
-
-            using (MemoryStream ms = new MemoryStream())
-            {
-                image.Save(ms, ImageFormat.Png);
-                imageBytes = ms.ToArray();
-            }
+            byte[] imageBytes = File.ReadAllBytes(tempFileName);
 
             string newFilename = String.IsNullOrWhiteSpace(_filename) 
                 ? Path.GetFileName(tempFileName)
