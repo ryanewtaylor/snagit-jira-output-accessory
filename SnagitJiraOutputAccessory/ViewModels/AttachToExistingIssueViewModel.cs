@@ -7,13 +7,15 @@
     using System.Drawing.Imaging;
     using System.IO;
     using System.Runtime.CompilerServices;
+    using System.Text.RegularExpressions;
     using System.Windows;
+    using System.Windows.Controls;
     using System.Windows.Input;
     using Atlassian.Jira;
     using SnagitJiraOutputAccessory.Models;
     using SNAGITLib;
 
-    public class AttachToExistingIssueViewModel : INotifyPropertyChanged
+    public class AttachToExistingIssueViewModel : INotifyPropertyChanged, INotifyDataErrorInfo
     {
         private ISnagIt _snagit;
         private Jira _jira;
@@ -90,7 +92,26 @@
                 {
                     _selectedIssue = value;
                     OnPropertyChanged();
+                    ValidateIssueId(_selectedIssue);
                 }
+            }
+        }
+
+        public void ValidateIssueId(string issueId)
+        {
+            Regex regex = new Regex(@"^([A-Za-z]+-\d+)$");
+            
+            if (!regex.IsMatch(issueId))
+            {
+                ICollection<string> validationErrors = new List<string>();
+                validationErrors.Add("Issue Id cannot be blank");
+                _errors["SelectedIssue"] = validationErrors;
+                OnErrorsChanged("SelectedIssue");
+            }
+            else
+            {
+                _errors.Remove("SelectedIssue");
+                OnErrorsChanged("SelectedIssue");
             }
         }
 
@@ -151,6 +172,31 @@
             SnagitJiraOutputAccessory.Commands.ICommand openWebPageCommand = new SnagitJiraOutputAccessory.Commands.OpenWebPageCommand(issueUrl);
             UploadCompleteNotification notifier = new UploadCompleteNotification();
             notifier.Notify(title, issueUrl, openWebPageCommand);
+        }
+
+        public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
+        private void OnErrorsChanged([CallerMemberName]string propertyName = "")
+        {
+             if (ErrorsChanged != null)
+            {
+                ErrorsChanged(this, new DataErrorsChangedEventArgs(propertyName));
+            }
+        }
+
+        private Dictionary<string, ICollection<string>> _errors = new Dictionary<string, ICollection<string>>();
+        public System.Collections.IEnumerable GetErrors(string propertyName)
+        {
+            if (string.IsNullOrEmpty(propertyName) || !_errors.ContainsKey(propertyName))
+            {
+                return null;
+            }
+            
+            return _errors[propertyName];
+        }
+
+        public bool HasErrors
+        {
+            get { return _errors.Count > 0; }
         }
     }
 
