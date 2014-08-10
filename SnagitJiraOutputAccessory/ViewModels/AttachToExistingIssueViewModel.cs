@@ -24,62 +24,6 @@
         {
             _snagit = snagit;
             _jira = jira;
-
-            IEnumerable<JiraNamedEntity> myJiraFilters = jira.GetFilters();
-            _filters = new List<JiraNamedEntity>(myJiraFilters);
-
-            if (_filters.Count > 0)
-            {
-                SelectedFilter = _filters[0].Name;
-            }
-        }
-
-        private void UpdateIsuesList()
-        {
-            IEnumerable<Issue> myJiraIssues = _jira.GetIssuesFromFilter(_selectedFilter);
-            Issues = new List<Issue>(myJiraIssues);
-
-            if (Issues.Count > 0)
-            {
-                SelectedIssue = Issues[0].Key.Value;
-            }
-        }
-
-        private IList<JiraNamedEntity> _filters;
-        public IList<JiraNamedEntity> Filters
-        {
-            get { return _filters; }
-            set
-            {
-                _filters = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private IList<Issue> _issues;
-        public IList<Issue> Issues
-        {
-            get { return _issues; }
-            set
-            {
-                _issues = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private string _selectedFilter = "";
-        public string SelectedFilter 
-        {
-            get { return _selectedFilter; }
-            set 
-            {
-                if (!String.Equals(_selectedFilter, value))
-                {
-                    _selectedFilter = value;
-                    UpdateIsuesList();
-                    OnPropertyChanged();
-                }
-            }
         }
 
         private string _selectedIssue = "";

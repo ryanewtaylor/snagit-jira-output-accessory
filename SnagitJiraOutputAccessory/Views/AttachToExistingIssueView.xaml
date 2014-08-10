@@ -44,61 +44,6 @@
         </Grid>
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Label
-                Grid.Column="0"
-                Style="{StaticResource Padding}"
-                HorizontalAlignment="Center"
-                Content="or"
-                />
-        </Grid>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" SharedSizeGroup="Label"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Label 
-                Grid.Column="0"
-                Style="{StaticResource Padding}"
-                Content="Filter"
-                />
-            <ComboBox
-                Grid.Column="1"
-                Style="{StaticResource Padding}"
-                ItemsSource="{Binding Path=Filters}"
-                DisplayMemberPath="Name"
-                SelectedValuePath="Name"
-                SelectedValue="{Binding Path=SelectedFilter}"
-                />
-        </Grid>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" SharedSizeGroup="Label"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Label
-                Grid.Column="0"
-                Style="{StaticResource Padding}"
-                Content="Issues"
-                />
-            <DataGrid
-                Grid.Column="1"
-                Style="{StaticResource Padding}"
-                Height="200"
-                AutoGenerateColumns="False"
-                ItemsSource="{Binding Path=Issues}"
-                SelectedValuePath="Key"
-                SelectedValue="{Binding Path=SelectedIssue}"
-                >
-                <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding Path=Key}" Header="Key" IsReadOnly="True"/>
-                    <DataGridTextColumn Binding="{Binding Path=Summary}" Header="Summary" IsReadOnly="True"/>
-                </DataGrid.Columns>
-            </DataGrid>
-        </Grid>
-        <Grid>
-            <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" SharedSizeGroup="Label"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
