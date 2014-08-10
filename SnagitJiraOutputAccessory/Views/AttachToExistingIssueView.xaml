@@ -38,6 +38,8 @@
                 Text="{Binding Path=SelectedIssue
                     , UpdateSourceTrigger=PropertyChanged
                     , ValidatesOnNotifyDataErrors=True}"
+                Width="150"
+                HorizontalAlignment="Left"
                 />
         </Grid>
         <Grid>
