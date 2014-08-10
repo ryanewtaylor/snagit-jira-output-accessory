@@ -12,6 +12,7 @@
     using System.Windows.Controls;
     using System.Windows.Input;
     using Atlassian.Jira;
+    using SnagitJiraOutputAccessory.Commands;
     using SnagitJiraOutputAccessory.Models;
     using SNAGITLib;
 
@@ -83,8 +84,8 @@
             }
         }
 
-        private ICommand _attachCommand;
-        public ICommand AttachCommand
+        private System.Windows.Input.ICommand _attachCommand;
+        public System.Windows.Input.ICommand AttachCommand
         {
             get
             {
@@ -141,30 +142,6 @@
         public bool HasErrors
         {
             get { return _errors.Count > 0; }
-        }
-    }
-
-    public class CommandHandler : ICommand
-    {
-        private Action _action;
-        private bool _canExecute;
-
-        public CommandHandler(Action action, bool canExecute)
-        {
-            _action = action;
-            _canExecute = canExecute;
-        }
-
-        public bool CanExecute(object parameter)
-        {
-            return _canExecute;
-        }
-
-        public event EventHandler CanExecuteChanged;
-
-        public void Execute(object parameter)
-        {
-            _action();
         }
     }
 }
