@@ -3,14 +3,10 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
-    using System.Drawing;
-    using System.Drawing.Imaging;
     using System.IO;
     using System.Runtime.CompilerServices;
     using System.Text.RegularExpressions;
     using System.Windows;
-    using System.Windows.Controls;
-    using System.Windows.Input;
     using Atlassian.Jira;
     using SnagitJiraOutputAccessory.Commands;
     using SnagitJiraOutputAccessory.Models;
