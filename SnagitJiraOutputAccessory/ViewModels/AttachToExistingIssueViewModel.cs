@@ -66,6 +66,20 @@
             }
         }
 
+        private string _comment = "";
+        public string Comment
+        {
+            get { return _comment; }
+            set
+            {
+                if (!String.Equals(_comment, value))
+                {
+                    _comment = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         private System.Windows.Input.ICommand _attachCommand;
         public System.Windows.Input.ICommand AttachCommand
         {
@@ -91,6 +105,11 @@
             UploadAttachmentInfo attachmentInfo = new UploadAttachmentInfo(newFilename, imageBytes);
             Issue issue = _jira.GetIssue(SelectedIssue);
             issue.AddAttachment(attachmentInfo);
+
+            if (!String.IsNullOrWhiteSpace(_comment))
+            {
+                issue.AddComment(_comment);
+            }
 
             string issueUrl = string.Format("{0}browse/{1}", _jira.Url, SelectedIssue);
             Clipboard.SetText(issueUrl);
