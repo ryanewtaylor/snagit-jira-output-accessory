@@ -21,6 +21,21 @@
         {
             _snagit = snagit;
             _jira = jira;
+            _filename = DefaultFileName(); 
+        }
+
+        private string DefaultFileName()
+        {
+            ISnagItDocument2 doc = _snagit.SelectedDocument as ISnagItDocument2;
+
+            string extension = Path.GetExtension(doc.DocumentPath);
+            if (extension == ".SNAG")
+            {
+                string filePath = Path.GetTempFileName();
+                return Path.GetFileName(filePath);
+            }
+
+            return Path.GetFileName(doc.DocumentPath);
         }
 
         private string _selectedIssue = "";
