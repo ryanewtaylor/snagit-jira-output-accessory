@@ -44,11 +44,11 @@
             
             if (!regex.IsMatch(issueId))
             {
-                base.AddErrors("SelectedIssueError", "Issue key cannot be blank");
+                base.AddErrors("SelectedIssue", "Issue key cannot be blank");
             }
             else
             {
-                base.RemoveErrors("SelectedIssueError");
+                base.RemoveErrors("SelectedIssue");
             }
         }
 

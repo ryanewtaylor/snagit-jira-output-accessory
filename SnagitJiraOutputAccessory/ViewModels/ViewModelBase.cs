@@ -22,16 +22,16 @@
         {
             // TODO: Check for existing errors and handle accordingly
             ICollection<string> validationErrors = new List<string>();
-            validationErrors.Add("Issue Id cannot be blank");
-            this.errors["SelectedIssue"] = validationErrors;
-            this.OnErrorsChanged("SelectedIssue");
+            validationErrors.Add(message);
+            this.errors[id] = validationErrors;
+            this.OnErrorsChanged(id);
         }
 
         public void RemoveErrors(string id)
         {
             // TODO: Check if it exists and remove if it does
-            this.errors.Remove("SelectedIssue");
-            this.OnErrorsChanged("SelectedIssue");
+            this.errors.Remove(id);
+            this.OnErrorsChanged(id);
         }
 
         public System.Collections.IEnumerable GetErrors(string propertyName)
