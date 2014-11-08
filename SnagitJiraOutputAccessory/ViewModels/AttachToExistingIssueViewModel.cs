@@ -62,7 +62,21 @@
                 {
                     _filename = value;
                     OnPropertyChanged();
+                    ValidateFileName(_filename);
                 }
+            }
+        }
+
+        public void ValidateFileName(string filename)
+        {
+            if (String.IsNullOrWhiteSpace(filename) 
+                || filename.IndexOfAny(Path.GetInvalidFileNameChars()) != -1)
+            {
+                base.AddErrors("Filename", "Filename has invalid characters.");
+            }
+            else
+            {
+                base.RemoveErrors("Filename");
             }
         }
 

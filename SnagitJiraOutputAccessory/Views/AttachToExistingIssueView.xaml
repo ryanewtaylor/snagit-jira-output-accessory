@@ -55,7 +55,9 @@
             <TextBox
                 Grid.Column="1"
                 Style="{StaticResource Padding}"
-                Text="{Binding Path=Filename}"
+                Text="{Binding Path=Filename
+                    , UpdateSourceTrigger=PropertyChanged
+                    , ValidatesOnNotifyDataErrors=True}"
                 />
         </Grid>
         <Grid>
