@@ -21,7 +21,10 @@
         {
             _snagit = snagit;
             _jira = jira;
-            _filename = DefaultFileName(); 
+            _filename = DefaultFileName();
+            
+            ValidateIssueId(_selectedIssue);
+            ValidateFileName(_filename);
         }
 
         private string DefaultFileName()
