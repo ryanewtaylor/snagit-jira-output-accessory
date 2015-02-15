@@ -14,6 +14,8 @@
         private ISnagIt _snagit;
         private Jira _jira;
 
+        private readonly CommandHandler<string> _attachCommand;
+
         public AttachToExistingIssueViewModel(ISnagIt snagit, Jira jira)
         {
             _snagit = snagit;
@@ -22,6 +24,8 @@
             
             ValidateIssueId(_selectedIssue);
             ValidateFileName(_filename);
+
+            _attachCommand = new CommandHandler<string>(s => AttachIssue(), s => !HasErrors);
         }
 
         private string DefaultFileName()
@@ -49,6 +53,7 @@
                     _selectedIssue = value;
                     OnPropertyChanged();
                     ValidateIssueId(_selectedIssue);
+                    _attachCommand.RaiseCanExecuteChanged();
                 }
             }
         }
@@ -78,6 +83,7 @@
                     _filename = value;
                     OnPropertyChanged();
                     ValidateFileName(_filename);
+                    _attachCommand.RaiseCanExecuteChanged();
                 }
             }
         }
@@ -109,16 +115,14 @@
             }
         }
 
-        private System.Windows.Input.ICommand _attachCommand;
         public System.Windows.Input.ICommand AttachCommand
         {
             get
             {
-                return _attachCommand ?? (_attachCommand = new CommandHandler(() => AttachIssue(), _canExecute));
+                return _attachCommand;
             }
         }
 
-        private bool _canExecute = true;
         private void AttachIssue()
         {
             // TODO: The saving image logic should be injected as IImageSaver/Helper/ToByter

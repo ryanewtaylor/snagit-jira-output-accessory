@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace SnagitJiraOutputAccessory.Commands
 {
-    public class CommandHandler : System.Windows.Input.ICommand
+    public class CommandHandler<T> : System.Windows.Input.ICommand
     {
-        private Action _action;
-        private bool _canExecute;
+        private Action<T> _action;
+        private readonly Predicate<T> _canExecute;
 
-        public CommandHandler(Action action, bool canExecute)
+        public CommandHandler(Action<T> action, Predicate<T> canExecute)
         {
             _action = action;
             _canExecute = canExecute;
@@ -19,14 +19,22 @@ namespace SnagitJiraOutputAccessory.Commands
 
         public bool CanExecute(object parameter)
         {
-            return _canExecute;
+            if (_canExecute == null) 
+                return true;
+
+            return _canExecute((parameter == null) ? default(T) : (T)Convert.ChangeType(parameter, typeof(T)));
         }
 
         public event EventHandler CanExecuteChanged;
+        public void RaiseCanExecuteChanged()
+        {
+            if (CanExecuteChanged != null) 
+                CanExecuteChanged(this, EventArgs.Empty);
+        }
 
         public void Execute(object parameter)
         {
-            _action();
+            _action((parameter == null) ? default(T) : (T)Convert.ChangeType(parameter, typeof(T)));
         }
     }
 }

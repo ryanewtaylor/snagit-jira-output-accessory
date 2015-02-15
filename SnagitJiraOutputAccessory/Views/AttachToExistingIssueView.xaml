@@ -86,8 +86,10 @@
                 HorizontalAlignment="Right"
                 Content="Attach"
                 IsDefault="True"
-                Command="{Binding AttachCommand}"
-                />
+                Command="{Binding Path=AttachCommand
+                    , UpdateSourceTrigger=PropertyChanged
+                    , ValidatesOnNotifyDataErrors=True}">
+            </Button>
             <Button
                 Grid.Column="1"
                 HorizontalAlignment="Right"
