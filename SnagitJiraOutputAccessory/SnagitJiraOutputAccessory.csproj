@@ -72,6 +72,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SnagitMenuFormatter.cs" />
     <Compile Include="ViewModels\AttachToExistingIssueViewModel.cs" />
+    <Compile Include="ViewModels\DialogCloser.cs" />
     <Compile Include="Views\AttachToExistingIssueView.xaml.cs">
       <DependentUpon>AttachToExistingIssueView.xaml</DependentUpon>
     </Compile>

@@ -2,7 +2,8 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:viewModels="clr-namespace:SnagitJiraOutputAccessory.ViewModels"
         mc:Ignorable="d"
         d:DesignHeight="242"
         d:DesignWidth="600"
@@ -11,7 +12,8 @@
         ResizeMode="NoResize"
         SizeToContent="Height"
         ShowInTaskbar="False"
-        Title="Attach to an Existing Issue">
+        Title="Attach to an Existing Issue"
+        viewModels:DialogCloser.DialogResult="{Binding Path=DialogResult}">
     <StackPanel Orientation="Vertical" Grid.IsSharedSizeScope="True" Margin="10">
         <StackPanel.Resources>
             <Style x:Key="Padding" TargetType="{x:Type Control}">
@@ -88,7 +90,8 @@
                 IsDefault="True"
                 Command="{Binding Path=AttachCommand
                     , UpdateSourceTrigger=PropertyChanged
-                    , ValidatesOnNotifyDataErrors=True}">
+                    , ValidatesOnNotifyDataErrors=True}"
+                >
             </Button>
             <Button
                 Grid.Column="1"

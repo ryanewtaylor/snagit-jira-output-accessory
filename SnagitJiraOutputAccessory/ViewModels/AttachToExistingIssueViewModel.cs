@@ -3,7 +3,7 @@
     using System;
     using System.IO;
     using System.Text.RegularExpressions;
-    using System.Windows;
+
     using Atlassian.Jira;
     using SnagitJiraOutputAccessory.Commands;
     using SnagitJiraOutputAccessory.Models;
@@ -40,6 +40,19 @@
             }
 
             return Path.GetFileName(doc.DocumentPath);
+        }
+
+        // http://blog.excastle.com/2010/07/25/mvvm-and-dialogresult-with-no-code-behind/
+        // http://blog.excastle.com/2010/07/25/mvvm-and-dialogresult-with-no-code-behind/
+        private bool? _dialogResult;
+        public bool? DialogResult
+        {
+            get { return _dialogResult; }
+            set
+            {
+                _dialogResult = value;
+                this.OnPropertyChanged();
+            }
         }
 
         private string _selectedIssue = "";
@@ -151,6 +164,8 @@
             SnagitJiraOutputAccessory.Commands.ICommand openWebPageCommand = new SnagitJiraOutputAccessory.Commands.OpenWebPageCommand(issueUrl);
             UploadCompleteNotification notifier = new UploadCompleteNotification();
             notifier.Notify(title, issueUrl, openWebPageCommand);
+
+            DialogResult = true;
         }
     }
 }
