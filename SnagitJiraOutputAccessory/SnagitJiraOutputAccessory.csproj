@@ -72,6 +72,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SnagitMenuFormatter.cs" />
     <Compile Include="ViewModels\AttachToExistingIssueViewModel.cs" />
+    <Compile Include="ViewModels\AttachToNewIssueViewModel.cs" />
     <Compile Include="ViewModels\DialogCloser.cs" />
     <Compile Include="Views\AttachToExistingIssueView.xaml.cs">
       <DependentUpon>AttachToExistingIssueView.xaml</DependentUpon>
@@ -81,6 +82,9 @@
     </Compile>
     <Compile Include="Views\AttachToNewIssueForm.Designer.cs">
       <DependentUpon>AttachToNewIssueForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AttachToNewIssueView.xaml.cs">
+      <DependentUpon>AttachToNewIssueView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PreferencesForm.cs">
       <SubType>Form</SubType>
@@ -131,6 +135,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\AttachToExistingIssueView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AttachToNewIssueView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

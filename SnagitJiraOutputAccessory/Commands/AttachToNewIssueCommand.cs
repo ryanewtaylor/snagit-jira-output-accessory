@@ -1,11 +1,8 @@
 ﻿namespace SnagitJiraOutputAccessory.Commands
 {
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Windows.Forms;
     using Atlassian.Jira;
     using SnagitJiraOutputAccessory.Models;
+    using SnagitJiraOutputAccessory.ViewModels;
     using SnagitJiraOutputAccessory.Views;
     using SNAGITLib;
 
@@ -23,58 +20,13 @@
         public void Execute()
         {
             var prefs = _outputPreferencesRepo.Read();
-
             Jira jira = new Jira(prefs.JiraRootUrl, prefs.Username, prefs.Password);
-            
-            // Eventually use a cache here so we don't always fetch
-            // new entries every time we ask for a new ticket
-            IList<Models.Project> myProjects = new List<Models.Project>();
 
-            if (myProjects.Count <= 0)
-            {
-                var projects = jira.GetProjects();
-                foreach (var project in projects)
-                {
-                    Models.Project myProject = new Models.Project(project.Id, project.Key, project.Name);
-                    var issueTypes = jira.GetIssueTypes(myProject.Key);
-                    foreach (var issueType in issueTypes)
-                    {
-                        Models.IssueType myIssuetype = new Models.IssueType(issueType.Id, issueType.Name, "", false);
-                        myProject.AddIssueType(myIssuetype);
-                    }
-
-                    myProjects.Add(myProject);
-                }
-            }
-
-            AttachToNewIssueForm form = new AttachToNewIssueForm(myProjects);
-            if (form.ShowDialog() == DialogResult.OK)
-            {
-                string projectKey = form.ProjectKey;
-                string issueType = form.IssueType;
-                string issueSummary = form.IssueSummary;
-
-                Issue issue = jira.CreateIssue(projectKey);
-                issue.Type = issueType;
-                issue.Summary = issueSummary;
-                issue.SaveChanges();
-
-                string issueKey = issue.Key.Value;
-
-                ISnagItImageDocumentSave saveableDoc = _snagit.SelectedDocument as ISnagItImageDocumentSave;
-                string tempFileName = Path.ChangeExtension(Path.GetTempFileName(), ".png");
-                saveableDoc.SaveToFile(tempFileName, snagImageFileType.siftPNG, null);
-
-                issue.AddAttachment(tempFileName);
-
-                string issueUrl = string.Format("{0}browse/{1}", jira.Url, issueKey);
-                Clipboard.SetText(issueUrl);
-
-                string title = string.Format("{0} attached to {1}", Path.GetFileName(tempFileName), issueKey);
-                ICommand openWebPageCommand = new OpenWebPageCommand(issueUrl);
-                UploadCompleteNotification notifier = new UploadCompleteNotification();
-                notifier.Notify(title, issueUrl, openWebPageCommand);
-            }
+            AttachToNewIssueView view = new AttachToNewIssueView();
+            var windowHelper = new System.Windows.Interop.WindowInteropHelper(view);
+            windowHelper.Owner = (System.IntPtr)(_snagit.TopLevelHWnd);
+            view.DataContext = new AttachToNewIssueViewModel(_snagit, jira);
+            view.ShowDialog();
         }
     }
 }

@@ -1,0 +1,127 @@
+﻿<Window x:Class="SnagitJiraOutputAccessory.Views.AttachToNewIssueView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:viewModels="clr-namespace:SnagitJiraOutputAccessory.ViewModels"
+        mc:Ignorable="d"
+        d:DesignHeight="242"
+        d:DesignWidth="600"
+        Width="600"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        SizeToContent="Height"
+        ShowInTaskbar="False"
+        Title="Attach to New Issue">
+    
+    <StackPanel Orientation="Vertical" Grid.IsSharedSizeScope="True" Margin="10">
+        <StackPanel.Resources>
+            <Style x:Key="Padding" TargetType="{x:Type Control}">
+                <Setter Property="Margin" Value="0,5,0,0"/>
+            </Style>
+            <Style x:Key="Buttons" TargetType="{x:Type Button}">
+                <Setter Property="Margin" Value="5,5,0,0"/>
+                <Setter Property="Padding" Value="15,1,15,1"/>
+            </Style>
+        </StackPanel.Resources>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" SharedSizeGroup="Label"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label
+                Grid.Column="0"
+                Style="{StaticResource Padding}"
+                Content="Project"
+                />
+            <ComboBox
+                Grid.Column="1"
+                Style="{StaticResource Padding}"
+                ItemsSource="{Binding Path=Projects}"
+                SelectedValuePath="Key"
+                DisplayMemberPath="Name"
+                SelectedValue="{Binding Path=SelectedProject
+                    , UpdateSourceTrigger=PropertyChanged
+                    , ValidatesOnNotifyDataErrors=True}"
+                Width="150"
+                HorizontalAlignment="Left"
+                />
+            <Label
+                Grid.Column="2"
+                Style="{StaticResource Padding}"
+                Content="Issue Type"
+                />
+            <ComboBox
+                Grid.Column="3"
+                Style="{StaticResource Padding}"
+                ItemsSource="{Binding Path=IssueTypes}"
+                SelectedValuePath="Id"
+                DisplayMemberPath="Name"
+                SelectedValue="{Binding Path=SelectededIssueType
+                    , UpdateSourceTrigger=PropertyChanged
+                    , ValidatesOnNotifyDataErrors=True}"
+                Width="150"
+                HorizontalAlignment="Left"
+                />
+        </Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" SharedSizeGroup="Label"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label
+                Grid.Column="0"
+                Style="{StaticResource Padding}"
+                Content="Summary"
+                />
+            <TextBox
+                Grid.Column="1"
+                Style="{StaticResource Padding}"
+                Height="50"
+                TextWrapping="Wrap"
+                AcceptsReturn="True"
+                Text="{Binding Path=Summary}"
+                />
+        </Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" SharedSizeGroup="Label"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label
+                Grid.Column="0"
+                Style="{StaticResource Padding}"
+                Content="Filename"
+                />
+            <TextBox
+                Grid.Column="1"
+                Style="{StaticResource Padding}"
+                Text="{Binding Path=Filename
+                    , UpdateSourceTrigger=PropertyChanged
+                    , ValidatesOnNotifyDataErrors=True}"
+                />
+        </Grid>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button 
+                Grid.Column="0"
+                Style="{StaticResource Buttons}"
+                HorizontalAlignment="Right"
+                Content="Attach"
+                IsDefault="True"
+                Command="{Binding Path=AttachCommand
+                    , UpdateSourceTrigger=PropertyChanged
+                    , ValidatesOnNotifyDataErrors=True}"
+                >
+            </Button>
+            <Button
+                Grid.Column="1"
+                HorizontalAlignment="Right"
+                Content="Cancel"
+                Style="{StaticResource Buttons}"
+                IsCancel="True"
+                />
+        </StackPanel>
+    </StackPanel>
+</Window>
