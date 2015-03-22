@@ -33,14 +33,15 @@
             _attachCommand = new CommandHandler<string>(s => AttachIssue(), s => !HasErrors);
 
             Projects = _jira.GetProjects().ToList();
+            SelectedProject = Projects.First().Key;
 
-            var defaultProject = _projects[0];
-            SelectedProject = defaultProject.Name;
-            IssueTypes = _jira.GetIssueTypes(defaultProject.Key).ToList();
-            var defaultIssueType = _issueTypes[0];
-            SelectedIssueType = defaultIssueType.Name;
+            UpdateIssueTypesForProject(SelectedProject);
+        }
 
-            //var issueTypes = _jira.GetIssueTypes();
+        private void UpdateIssueTypesForProject(string projectKey)
+        {
+            IssueTypes = _jira.GetIssueTypes(projectKey).ToList();
+            SelectedIssueType = IssueTypes.First().Id;
         }
 
         private string DefaultFileName()
@@ -103,6 +104,7 @@
                     _selectedProject = value;
                     OnPropertyChanged();
                     _attachCommand.RaiseCanExecuteChanged();
+                    UpdateIssueTypesForProject(_selectedProject);
                 }
             }
         }
