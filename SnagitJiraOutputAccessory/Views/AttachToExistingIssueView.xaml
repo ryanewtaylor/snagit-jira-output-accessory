@@ -82,8 +82,7 @@
                 />
         </Grid>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button 
-                Grid.Column="0"
+            <Button
                 Style="{StaticResource Buttons}"
                 HorizontalAlignment="Right"
                 Content="Attach"
@@ -94,7 +93,6 @@
                 >
             </Button>
             <Button
-                Grid.Column="1"
                 HorizontalAlignment="Right"
                 Content="Cancel"
                 Style="{StaticResource Buttons}"
