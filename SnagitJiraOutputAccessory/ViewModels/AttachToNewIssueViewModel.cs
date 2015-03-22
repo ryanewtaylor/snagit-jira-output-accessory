@@ -217,36 +217,39 @@
 
         private void AttachIssue()
         {
-            /*
-            // TODO: The saving image logic should be injected as IImageSaver/Helper/ToByter
-            ISnagItImageDocumentSave saveableDoc = _snagit.SelectedDocument as ISnagItImageDocumentSave;
-            string tempFileName = Path.ChangeExtension(Path.GetTempFileName(), ".png");
-            saveableDoc.SaveToFile(tempFileName, snagImageFileType.siftPNG, null);
-            byte[] imageBytes = File.ReadAllBytes(tempFileName);
-
-            string newFilename = String.IsNullOrWhiteSpace(_filename)
-                ? Path.GetFileName(tempFileName)
-                : Path.GetFileNameWithoutExtension(_filename) + ".png";
-
-            UploadAttachmentInfo attachmentInfo = new UploadAttachmentInfo(newFilename, imageBytes);
-            Issue issue = _jira.GetIssue(SelectedIssue);
-            issue.AddAttachment(attachmentInfo);
-
-            if (!String.IsNullOrWhiteSpace(_comment))
+            try
             {
-                issue.AddComment(_comment);
+                // TODO: The saving image logic should be injected as IImageSaver/Helper/ToByter
+                ISnagItImageDocumentSave saveableDoc = _snagit.SelectedDocument as ISnagItImageDocumentSave;
+                string tempFileName = Path.ChangeExtension(Path.GetTempFileName(), ".png");
+                saveableDoc.SaveToFile(tempFileName, snagImageFileType.siftPNG, null);
+                byte[] imageBytes = File.ReadAllBytes(tempFileName);
+
+                string newFilename = String.IsNullOrWhiteSpace(_filename)
+                    ? Path.GetFileName(tempFileName)
+                    : Path.GetFileNameWithoutExtension(_filename) + ".png";
+
+                UploadAttachmentInfo attachmentInfo = new UploadAttachmentInfo(newFilename, imageBytes);
+                Issue issue = _jira.CreateIssue(SelectedProject);
+                issue.Summary = Summary;
+                issue.Type = SelectedIssueType;
+                issue.SaveChanges();
+                issue.AddAttachment(attachmentInfo);
+
+                string issueUrl = string.Format("{0}browse/{1}", _jira.Url, issue.Key);
+                Clipboard.SetText(issueUrl);
+
+                string title = string.Format("{0} attached to {1}", newFilename, issue.Key);
+                SnagitJiraOutputAccessory.Commands.ICommand openWebPageCommand = new SnagitJiraOutputAccessory.Commands.OpenWebPageCommand(issueUrl);
+                var notifier = new SnagitJiraOutputAccessory.Models.UploadCompleteNotification();
+                notifier.Notify(title, issueUrl, openWebPageCommand);
+
+                DialogResult = true;
             }
-
-            string issueUrl = string.Format("{0}browse/{1}", _jira.Url, SelectedIssue);
-            Clipboard.SetText(issueUrl);
-
-            string title = string.Format("{0} attached to {1}", newFilename, SelectedIssue);
-            SnagitJiraOutputAccessory.Commands.ICommand openWebPageCommand = new SnagitJiraOutputAccessory.Commands.OpenWebPageCommand(issueUrl);
-            UploadCompleteNotification notifier = new UploadCompleteNotification();
-            notifier.Notify(title, issueUrl, openWebPageCommand);
-            */
-
-            DialogResult = true;
+            catch (Exception ex)
+            {
+                // TODO: Cleanly notify user of any errors
+            }
         }
     }
 }
