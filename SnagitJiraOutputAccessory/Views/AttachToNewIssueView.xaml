@@ -29,8 +29,6 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" SharedSizeGroup="Label"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Label
                 Grid.Column="0"
@@ -46,16 +44,21 @@
                 SelectedValue="{Binding Path=SelectedProject
                     , UpdateSourceTrigger=PropertyChanged
                     , ValidatesOnNotifyDataErrors=True}"
-                Width="150"
                 HorizontalAlignment="Left"
                 />
+        </Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" SharedSizeGroup="Label"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
             <Label
-                Grid.Column="2"
+                Grid.Column="0"
                 Style="{StaticResource Padding}"
                 Content="Issue Type"
                 />
             <ComboBox
-                Grid.Column="3"
+                Grid.Column="1"
                 Style="{StaticResource Padding}"
                 ItemsSource="{Binding Path=IssueTypes}"
                 SelectedValuePath="Id"
@@ -63,7 +66,6 @@
                 SelectedValue="{Binding Path=SelectedIssueType
                     , UpdateSourceTrigger=PropertyChanged
                     , ValidatesOnNotifyDataErrors=True}"
-                Width="150"
                 HorizontalAlignment="Left"
                 />
         </Grid>
