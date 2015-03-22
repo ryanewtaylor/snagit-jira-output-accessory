@@ -103,6 +103,7 @@
                 {
                     _selectedProject = value;
                     OnPropertyChanged();
+                    ValidateProject(_selectedProject);
                     _attachCommand.RaiseCanExecuteChanged();
                     UpdateIssueTypesForProject(_selectedProject);
                 }
@@ -113,7 +114,7 @@
         {
             if (String.IsNullOrWhiteSpace(project))
             {
-                base.AddErrors("Must select a project", "Project cannot be blank");
+                base.AddErrors("SelectedProject", "Project cannot be blank");
             }
             else
             {
@@ -131,6 +132,7 @@
                 {
                     _selectedIssueType = value;
                     OnPropertyChanged();
+                    ValidateIssueType(_selectedIssueType);
                     _attachCommand.RaiseCanExecuteChanged();
                 }
             }
@@ -140,7 +142,7 @@
         {
             if (String.IsNullOrWhiteSpace(issueType))
             {
-                base.AddErrors("Must select an issue type", "Issue type cannot be blank");
+                base.AddErrors("SelectedIssueType", "Issue type cannot be blank");
             }
             else
             {
@@ -187,6 +189,7 @@
                 {
                     _summary = value;
                     OnPropertyChanged();
+                    ValidateSummary(_summary);
                     _attachCommand.RaiseCanExecuteChanged();
                 }
             }
@@ -196,7 +199,7 @@
         {
             if (String.IsNullOrWhiteSpace(summary))
             {
-                base.AddErrors("Must enter a summary", "Summary cannot be blank");
+                base.AddErrors("Summary", "Summary cannot be blank");
             }
             else
             {

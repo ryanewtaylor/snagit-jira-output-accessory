@@ -82,7 +82,9 @@
                 Height="50"
                 TextWrapping="Wrap"
                 AcceptsReturn="True"
-                Text="{Binding Path=Summary}"
+                Text="{Binding Path=Summary
+                    , UpdateSourceTrigger=PropertyChanged
+                    , ValidatesOnDataErrors=True}"
                 />
         </Grid>
         <Grid>
