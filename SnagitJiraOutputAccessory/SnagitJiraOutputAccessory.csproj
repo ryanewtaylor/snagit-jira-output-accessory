@@ -62,8 +62,6 @@
     <Compile Include="Commands\ConfigureSettingsCommand.cs" />
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Commands\LaunchUrlCommand.cs" />
-    <Compile Include="Models\IssueType.cs" />
-    <Compile Include="Models\Project.cs" />
     <Compile Include="Models\UploadCompleteNotification.cs" />
     <Compile Include="Models\OutputPreferences.cs" />
     <Compile Include="Models\OutputPreferencesRepository.cs" />
