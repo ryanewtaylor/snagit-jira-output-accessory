@@ -78,12 +78,6 @@
     <Compile Include="Views\AttachToExistingIssueView.xaml.cs">
       <DependentUpon>AttachToExistingIssueView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\AttachToNewIssueForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\AttachToNewIssueForm.Designer.cs">
-      <DependentUpon>AttachToNewIssueForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Views\AttachToNewIssueView.xaml.cs">
       <DependentUpon>AttachToNewIssueView.xaml</DependentUpon>
     </Compile>
@@ -127,9 +121,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\AttachToNewIssueForm.resx">
-      <DependentUpon>AttachToNewIssueForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Views\PreferencesForm.resx">
       <DependentUpon>PreferencesForm.cs</DependentUpon>
     </EmbeddedResource>
