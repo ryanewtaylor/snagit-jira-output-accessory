@@ -25,7 +25,7 @@
             AttachToNewIssueView view = new AttachToNewIssueView();
             var windowHelper = new System.Windows.Interop.WindowInteropHelper(view);
             windowHelper.Owner = (System.IntPtr)(_snagit.TopLevelHWnd);
-            view.DataContext = new AttachToNewIssueViewModel(_snagit, jira);
+            view.DataContext = new AttachToNewIssueViewModel(_snagit, jira, _outputPreferencesRepo);
             view.ShowDialog();
         }
     }

@@ -35,17 +35,22 @@
                 Style="{StaticResource Padding}"
                 Content="Project"
                 />
-            <ComboBox
-                Grid.Column="1"
-                Style="{StaticResource Padding}"
-                ItemsSource="{Binding Path=Projects}"
-                SelectedValuePath="Key"
-                DisplayMemberPath="Name"
-                SelectedValue="{Binding Path=SelectedProject
-                    , UpdateSourceTrigger=PropertyChanged
-                    , ValidatesOnNotifyDataErrors=True}"
-                HorizontalAlignment="Left"
-                />
+            <StackPanel Orientation="Horizontal" Grid.Column="1">
+                <ComboBox
+                    Style="{StaticResource Padding}"
+                    ItemsSource="{Binding Path=Projects}"
+                    SelectedValuePath="Key"
+                    DisplayMemberPath="Name"
+                    SelectedValue="{Binding Path=SelectedProject
+                        , UpdateSourceTrigger=PropertyChanged
+                        , ValidatesOnNotifyDataErrors=True}"
+                    HorizontalAlignment="Left"
+                    /> 
+                <CheckBox 
+                    IsChecked="{Binding Path=RememberProject, UpdateSourceTrigger=PropertyChanged}" 
+                    Content="Remember Project"
+                    VerticalAlignment="Center" Margin="5,5,0,0"/>
+            </StackPanel>
         </Grid>
         <Grid>
             <Grid.ColumnDefinitions>

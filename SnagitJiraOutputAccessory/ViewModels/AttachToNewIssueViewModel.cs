@@ -8,6 +8,8 @@
 
     using Atlassian.Jira;
     using SnagitJiraOutputAccessory.Commands;
+    using SnagitJiraOutputAccessory.Models;
+
     using SNAGITLib;
 
     using Clipboard = System.Windows.Clipboard;
@@ -16,24 +18,28 @@
     {
         private ISnagIt _snagit;
         private Jira _jira;
+        private OutputPreferencesRepository _preferencesRepo;
 
         private readonly CommandHandler<string> _attachCommand;
 
-        public AttachToNewIssueViewModel(ISnagIt snagit, Jira jira)
+        public AttachToNewIssueViewModel(ISnagIt snagit, Jira jira, OutputPreferencesRepository preferencesRepo)
         {
             _snagit = snagit;
             _jira = jira;
             _filename = DefaultFileName();
+            _preferencesRepo = preferencesRepo; // TODO: Maybe consider making a PreferencesWriter/Reader?
+            var prefs = _preferencesRepo.Read();
+            _rememberProject = !string.IsNullOrWhiteSpace(prefs.LastProjectKey);
 
             ValidateProject(_selectedProject);
             ValidateIssueType(_selectedIssueType);
             ValidateSummary(_summary);
             ValidateFileName(_filename);
-
+            
             _attachCommand = new CommandHandler<string>(s => AttachIssue(), s => !HasErrors);
 
             Projects = _jira.GetProjects().ToList();
-            SelectedProject = Projects.First().Key;
+            SelectedProject = prefs.LastProjectKey ?? Projects.First().Key;
 
             UpdateIssueTypesForProject(SelectedProject);
         }
@@ -106,6 +112,7 @@
                     ValidateProject(_selectedProject);
                     _attachCommand.RaiseCanExecuteChanged();
                     UpdateIssueTypesForProject(_selectedProject);
+                    if (RememberProject) SetProjectKeyToRemember(_selectedProject);
                 }
             }
         }
@@ -205,6 +212,30 @@
             {
                 base.RemoveErrors("Summary");
             }
+        }
+
+        private bool _rememberProject = false;
+        public bool RememberProject
+        {
+            get { return _rememberProject; }
+            set
+            {
+                if (_rememberProject != value)
+                {
+                    _rememberProject = value;
+                    this.OnPropertyChanged();
+
+                    var projectKey = _rememberProject ? SelectedProject : null;
+                    SetProjectKeyToRemember(projectKey);
+                }
+            }
+        }
+
+        private void SetProjectKeyToRemember(string projectKey)
+        {
+            var prefs = _preferencesRepo.Read();
+            prefs.LastProjectKey = projectKey;
+            _preferencesRepo.Write(prefs);
         }
 
         public System.Windows.Input.ICommand AttachCommand
