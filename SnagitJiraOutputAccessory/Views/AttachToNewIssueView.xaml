@@ -59,7 +59,7 @@
                 ItemsSource="{Binding Path=IssueTypes}"
                 SelectedValuePath="Id"
                 DisplayMemberPath="Name"
-                SelectedValue="{Binding Path=SelectededIssueType
+                SelectedValue="{Binding Path=SelectedIssueType
                     , UpdateSourceTrigger=PropertyChanged
                     , ValidatesOnNotifyDataErrors=True}"
                 Width="150"
