@@ -243,12 +243,14 @@
                 SnagitJiraOutputAccessory.Commands.ICommand openWebPageCommand = new SnagitJiraOutputAccessory.Commands.OpenWebPageCommand(issueUrl);
                 var notifier = new SnagitJiraOutputAccessory.Models.UploadCompleteNotification();
                 notifier.Notify(title, issueUrl, openWebPageCommand);
-
-                DialogResult = true;
             }
             catch (Exception ex)
             {
                 // TODO: Cleanly notify user of any errors
+            }
+            finally
+            {
+                DialogResult = true;
             }
         }
     }
