@@ -9,6 +9,8 @@
     using SnagitJiraOutputAccessory.Models;
     using SNAGITLib;
 
+    using Clipboard = System.Windows.Clipboard;
+
     public class AttachToExistingIssueViewModel : ViewModelBase
     {
         private ISnagIt _snagit;
