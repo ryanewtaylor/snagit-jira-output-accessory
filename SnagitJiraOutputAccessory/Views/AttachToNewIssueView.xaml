@@ -12,7 +12,8 @@
         ResizeMode="NoResize"
         SizeToContent="Height"
         ShowInTaskbar="False"
-        Title="Attach to New Issue">
+        Title="Attach to New Issue"
+        viewModels:DialogCloser.DialogResult="{Binding Path=DialogResult}">
     
     <StackPanel Orientation="Vertical" Grid.IsSharedSizeScope="True" Margin="10">
         <StackPanel.Resources>
