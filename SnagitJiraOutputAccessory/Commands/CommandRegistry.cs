@@ -10,7 +10,7 @@
         {
             {"AttachToNewIssueCommand", new CommandInfo("AttachToNewIssueCommand", "Attach To New Issue", typeof(AttachToNewIssueCommand))}
             , { "AttachToExistingIssueCommand", new CommandInfo("AttachToExistingIssueCommand", "Attach To Existing Issue", typeof(AttachToExistingIssueCommand))}
-            , {"ConfigureSettingsCommand", new CommandInfo("ConfigureSettingsCommand", "Preferences", typeof(ConfigureSettingsCommand))}
+            , {"ConfigureSettingsCommand", new CommandInfo("ConfigureSettingsCommand", "Options", typeof(ConfigureSettingsCommand))}
         };
 
         public static CommandInfo GetDefaultCommandInfo()
