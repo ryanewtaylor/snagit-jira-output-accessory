@@ -73,17 +73,15 @@
     <Compile Include="ViewModels\AttachToExistingIssueViewModel.cs" />
     <Compile Include="ViewModels\AttachToNewIssueViewModel.cs" />
     <Compile Include="ViewModels\DialogCloser.cs" />
+    <Compile Include="ViewModels\OutputOptionsViewModel.cs" />
     <Compile Include="Views\AttachToExistingIssueView.xaml.cs">
       <DependentUpon>AttachToExistingIssueView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AttachToNewIssueView.xaml.cs">
       <DependentUpon>AttachToNewIssueView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\PreferencesForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\PreferencesForm.Designer.cs">
-      <DependentUpon>PreferencesForm.cs</DependentUpon>
+    <Compile Include="Views\OutputOptionsView.xaml.cs">
+      <DependentUpon>OutputOptionsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\ViewModelBase.cs" />
   </ItemGroup>
@@ -119,16 +117,15 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\PreferencesForm.resx">
-      <DependentUpon>PreferencesForm.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <Page Include="Views\AttachToExistingIssueView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AttachToNewIssueView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OutputOptionsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
