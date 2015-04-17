@@ -1,1 +1,1 @@
-%SystemRoot%\Microsoft.NET\Framework\v2.0.50727\regasm.exe /codebase SnagitJiraOutputAccessory.dll
+%SystemRoot%\Microsoft.NET\Framework\v4.0.30319\RegAsm.exe /codebase SnagitJiraOutputAccessory.dll
