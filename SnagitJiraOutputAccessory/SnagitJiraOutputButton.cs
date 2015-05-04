@@ -6,6 +6,7 @@
     using SnagitJiraOutputAccessory.Commands;
     using SNAGITLib;
 
+    [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.None)]
     [Guid("D3B2FCA3-7A2C-4AF9-86D4-2E542118E8F8")]
     public class SnagitJiraOutputButton : MarshalByRefObject, IComponentInitialize, IOutput, IOutputMenu, IComponentWantsCategoryPreferences
