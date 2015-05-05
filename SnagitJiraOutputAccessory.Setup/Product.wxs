@@ -18,6 +18,11 @@
         <Feature Id="ProductFeature" Title="SnagitJiraOutputAccessory.Setup" Level="1">
             <ComponentGroupRef Id="ProductComponents" />
         </Feature>
+    
+        <Condition Message="[ProductName] is only supported on Windows 7 and higher.">
+            <![CDATA[Installed OR (VersionNT >= 601)]]>
+        </Condition>
+    
     </Product>
     
     <Fragment>
