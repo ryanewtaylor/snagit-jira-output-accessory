@@ -29,6 +29,16 @@
         <Condition Message="[ProductName] requires .NET Framework 4.5 or better. Please install .NET Framework 4.5 and try again.">
             <![CDATA[Installed OR NETFRAMEWORK45]]>
         </Condition>
+        
+        <Property Id="SNAGITVERSION">
+            <DirectorySearch Id="PROGRAMFILESVERSION" Path="[ProgramFilesFolder]" Depth="2">
+                <FileSearch Name="Snagit32.exe" MinVersion="11"/>
+            </DirectorySearch>
+        </Property>
+        
+        <Condition Message="[ProductName] is only supported with Snagit 11 or better.">
+            <![CDATA[Installed OR SNAGITVERSION]]>
+        </Condition>
     
     </Product>
     
