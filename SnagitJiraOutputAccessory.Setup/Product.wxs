@@ -2,11 +2,13 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
      xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
     
+    <?define ProductVersion="!(bind.fileVersion.theFile)" ?>
+             
     <Product Id="225D11AC-63BD-4122-8793-3EFC03BD662B"
              UpgradeCode="E1F9C8CA-8786-4957-BEBC-A7D8D705F44E"
              Language="1033"
              Name="Snagit Jira Output Accessory"
-             Version="0.1.0"
+             Version="$(var.ProductVersion)"
              Manufacturer="Ryan Taylor">
 
         <Package Id="*"
@@ -74,23 +76,22 @@
                     <ProgId Id="SnagitJiraOutputAccessory.SnagitJiraOutputButton" Description="SnagitJiraOutputAccessory.SnagitJiraOutputButton" />
                 </Class>
 
-                <!-- TODO: Replace 0.1.0.0 with assembly version -->
                 <RegistryValue Root="HKCR" Key="CLSID\{55A50CAA-D9E3-4239-8B02-D6D2A396F4AF}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{55A50CAA-D9E3-4239-8B02-D6D2A396F4AF}\InprocServer32\0.1.0.0" Name="Class" Value="SnagitJiraOutputAccessory.Package" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{55A50CAA-D9E3-4239-8B02-D6D2A396F4AF}\InprocServer32\0.1.0.0" Name="Assembly" Value="SnagitJiraOutputAccessory, Version=0.1.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{55A50CAA-D9E3-4239-8B02-D6D2A396F4AF}\InprocServer32\0.1.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{55A50CAA-D9E3-4239-8B02-D6D2A396F4AF}\InprocServer32\0.1.0.0" Name="CodeBase" Value="file:///[#theFile]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{55A50CAA-D9E3-4239-8B02-D6D2A396F4AF}\InprocServer32\$(var.ProductVersion)" Name="Class" Value="SnagitJiraOutputAccessory.Package" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{55A50CAA-D9E3-4239-8B02-D6D2A396F4AF}\InprocServer32\$(var.ProductVersion)" Name="Assembly" Value="SnagitJiraOutputAccessory, Version=$(var.ProductVersion), Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{55A50CAA-D9E3-4239-8B02-D6D2A396F4AF}\InprocServer32\$(var.ProductVersion)" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{55A50CAA-D9E3-4239-8B02-D6D2A396F4AF}\InprocServer32\$(var.ProductVersion)" Name="CodeBase" Value="file:///[#theFile]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{55A50CAA-D9E3-4239-8B02-D6D2A396F4AF}\InprocServer32" Name="Class" Value="SnagitJiraOutputAccessory.Package" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{55A50CAA-D9E3-4239-8B02-D6D2A396F4AF}\InprocServer32" Name="Assembly" Value="SnagitJiraOutputAccessory, Version=0.1.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{55A50CAA-D9E3-4239-8B02-D6D2A396F4AF}\InprocServer32" Name="Assembly" Value="SnagitJiraOutputAccessory, Version=$(var.ProductVersion), Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{55A50CAA-D9E3-4239-8B02-D6D2A396F4AF}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{55A50CAA-D9E3-4239-8B02-D6D2A396F4AF}\InprocServer32" Name="CodeBase" Value="file:///[#theFile]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{D3B2FCA3-7A2C-4AF9-86D4-2E542118E8F8}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{D3B2FCA3-7A2C-4AF9-86D4-2E542118E8F8}\InprocServer32\0.1.0.0" Name="Class" Value="SnagitJiraOutputAccessory.SnagitJiraOutputButton" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{D3B2FCA3-7A2C-4AF9-86D4-2E542118E8F8}\InprocServer32\0.1.0.0" Name="Assembly" Value="SnagitJiraOutputAccessory, Version=0.1.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{D3B2FCA3-7A2C-4AF9-86D4-2E542118E8F8}\InprocServer32\0.1.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{D3B2FCA3-7A2C-4AF9-86D4-2E542118E8F8}\InprocServer32\0.1.0.0" Name="CodeBase" Value="file:///[#theFile]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{D3B2FCA3-7A2C-4AF9-86D4-2E542118E8F8}\InprocServer32\$(var.ProductVersion)" Name="Class" Value="SnagitJiraOutputAccessory.SnagitJiraOutputButton" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{D3B2FCA3-7A2C-4AF9-86D4-2E542118E8F8}\InprocServer32\$(var.ProductVersion)" Name="Assembly" Value="SnagitJiraOutputAccessory, Version=$(var.ProductVersion), Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{D3B2FCA3-7A2C-4AF9-86D4-2E542118E8F8}\InprocServer32\$(var.ProductVersion)" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{D3B2FCA3-7A2C-4AF9-86D4-2E542118E8F8}\InprocServer32\$(var.ProductVersion)" Name="CodeBase" Value="file:///[#theFile]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{D3B2FCA3-7A2C-4AF9-86D4-2E542118E8F8}\InprocServer32" Name="Class" Value="SnagitJiraOutputAccessory.SnagitJiraOutputButton" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{D3B2FCA3-7A2C-4AF9-86D4-2E542118E8F8}\InprocServer32" Name="Assembly" Value="SnagitJiraOutputAccessory, Version=0.1.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{D3B2FCA3-7A2C-4AF9-86D4-2E542118E8F8}\InprocServer32" Name="Assembly" Value="SnagitJiraOutputAccessory, Version=$(var.ProductVersion), Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{D3B2FCA3-7A2C-4AF9-86D4-2E542118E8F8}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{D3B2FCA3-7A2C-4AF9-86D4-2E542118E8F8}\InprocServer32" Name="CodeBase" Value="file:///[#theFile]" Type="string" Action="write" />
             </Component>
