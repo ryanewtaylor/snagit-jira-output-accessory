@@ -3,7 +3,7 @@
 open Fake
 open System.Text
 
-let buildVersion = if buildVersion = localBuildLabel then "0.0.0" else "0.1.0"
+let buildVersion = "0.1.0.0"
 let sha = Git.Information.getCurrentSHA1 @".\"
 
 Target "Clean" (fun _ ->
