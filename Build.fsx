@@ -6,11 +6,9 @@ open System.Text
 let buildVersion = if buildVersion = localBuildLabel then "0.0.0" else "0.1.0"
 let sha = Git.Information.getCurrentSHA1 @".\"
 
-let debugBuildDir = @".\SnagitJiraOutputAccessory\bin\Debug"
-let releaseBuildDir = @".\SnagitJiraOutputAccessory\bin\Release"
-
 Target "Clean" (fun _ ->
-    CleanDirs [debugBuildDir; releaseBuildDir]
+    MSBuildWithDefaults "Clean" [".\SnagitJiraOutputAccessory.sln"]
+    |> Log "AppBuild-Output: "
 )
 
 Target "SetAssemblyInfo" (fun _ ->
