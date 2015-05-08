@@ -6,7 +6,7 @@
     <ProductVersion>3.9</ProductVersion>
     <ProjectGuid>01349c2c-06d4-4e7f-9b0e-ee0fc78d2f89</ProjectGuid>
     <SchemaVersion>2.0</SchemaVersion>
-    <OutputName>SnagitJiraOutputAccessory.Setup</OutputName>
+    <OutputName>SnagitJiraOutputAccessorySetup</OutputName>
     <OutputType>Package</OutputType>
     <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' AND '$(MSBuildExtensionsPath32)' != '' ">$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
     <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' ">$(MSBuildExtensionsPath)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
