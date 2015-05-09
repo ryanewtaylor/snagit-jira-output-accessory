@@ -5,6 +5,7 @@ This project adds a new button to Snagit's Output Accessories to enable you to s
 # Prerequisites
 
 * Visual Studio 2012
+* [WiX Toolset](http://wixtoolset.org/)
 * Snagit 11
 
 # How to Run
