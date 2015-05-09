@@ -1,6 +1,6 @@
-# Snagit Jira Output Accessory 
+# Snagit JIRA Output Accessory 
 
-This project adds a new button to Snagit's Output Accessories to enable you to send captured content directly to Jira.
+This project adds a new button to Snagit's Output Accessories to enable you to send captured content directly to JIRA.
 
 ## Installation
 
@@ -19,8 +19,8 @@ This project adds a new button to Snagit's Output Accessories to enable you to s
 
 ### Configure
 4. Launch Snagit Editor
-5. Click Share tab
-6. Click the arrow under the JIRA button
+5. Click the Share tab
+6. Click the arrow/menu under the JIRA button
 7. Click Options
 8. Supply your JIRA Url, Username, and Password, example:
    * JIRA Url = https://jira.yourdomain.com
@@ -30,10 +30,10 @@ This project adds a new button to Snagit's Output Accessories to enable you to s
 
 ### Usage
 10. Click the JIRA button to upload the selected image to a new issue
-11. Click the JIRA dropdown for more options such as attaching the image to an existing issue
+11. Click the JIRA arrow/menu for more options such as attaching the image to an existing issue
 
 *Note: This has only been tested and verified on Windows 7, with Snagit 11, and 
-.NET 4.5 and only on my machine. For a list of known and issues limitations (or
+.NET 4.5 and only on my machine. For a list of known issues and limitations (or
 to submit new ones see the [issues list](https://github.com/ryanewtaylor/snagit-jira-output-accessory/issues)*
 
 ## Contributing
@@ -46,7 +46,7 @@ to submit new ones see the [issues list](https://github.com/ryanewtaylor/snagit-
 
 ### Getting the Source
 
-* Fork repository on Github
+* Fork [Snagit JIRA Output Accessory](https://github.com/ryanewtaylor/snagit-jira-output-accessory) on Github
 * Clone your forked repository
 
 ### Programming
