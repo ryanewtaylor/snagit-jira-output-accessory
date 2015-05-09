@@ -4,7 +4,7 @@ open Fake
 open System.Text
 open System.IO
 
-let buildVersion = "0.1.0"
+let buildVersion = "0.2.0"
 let sha = Git.Information.getCurrentSHA1 @".\"
 let currBranch = Git.Information.getBranchName @".\"
 
