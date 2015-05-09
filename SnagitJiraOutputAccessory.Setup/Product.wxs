@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
+    
+    <?define ProductVersion="!(bind.fileVersion.SnagitJiraOutputAccessoryDll)" ?>
+             
+    <Product Id="225D11AC-63BD-4122-8793-3EFC03BD662B"
+             UpgradeCode="E1F9C8CA-8786-4957-BEBC-A7D8D705F44E"
+             Language="1033"
+             Name="Snagit Jira Output Accessory"
+             Version="$(var.ProductVersion)"
+             Manufacturer="Ryan Taylor">
+
+        <Package Id="*"
+                 InstallerVersion="200"
+                 Compressed="yes"
+                 InstallScope="perMachine" />
+
+        <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+        <MediaTemplate EmbedCab="yes" />
+
+        <Feature Id="ProductFeature" Title="SnagitJiraOutputAccessory.Setup" Level="1">
+            <ComponentGroupRef Id="ProductComponents" />
+        </Feature>
+    
+        <Condition Message="[ProductName] is only supported on Windows 7 and higher.">
+            <![CDATA[Installed OR (VersionNT >= 601)]]>
+        </Condition>
+    
+        <PropertyRef Id="NETFRAMEWORK45"/>
+        <Condition Message="[ProductName] requires .NET Framework 4.5 or better. Please install .NET Framework 4.5 and try again.">
+            <![CDATA[Installed OR NETFRAMEWORK45]]>
+        </Condition>
+        
+        <Property Id="SNAGITVERSION">
+            <DirectorySearch Id="PROGRAMFILESVERSION" Path="[ProgramFilesFolder]" Depth="2">
+                <FileSearch Name="Snagit32.exe" MinVersion="11"/>
+            </DirectorySearch>
+        </Property>
+        
+        <Condition Message="[ProductName] is only supported with Snagit 11 or better.">
+            <![CDATA[Installed OR SNAGITVERSION]]>
+        </Condition>
+    
+    </Product>
+    
+    <Fragment>
+        <Property Id="INSTALLDIR">
+            <DirectorySearch Id="LocalAppDataFolder" Path="[LocalAppDataFolder]" AssignToProperty="no" Depth="0">
+                <DirectorySearch Id="SnagitAccessoriesDir" Path="TechSmith\Snagit\Accessories" AssignToProperty="yes" Depth="0"/>
+            </DirectorySearch>
+        </Property>
+        
+        <Directory Id="TARGETDIR" Name="SourceDir">
+            <Directory Id="INSTALLDIR">
+                <Directory Id="INSTALLFOLDER" Name="{55A50CAA-D9E3-4239-8B02-D6D2A396F4AF}" />
+            </Directory>
+        </Directory>
+    </Fragment>
+
+    <Fragment>
+        <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+            <Component Id="JiraOutputPlugin" Guid="123787D5-F69E-4A78-B0D7-14E11913FA03">
+                <File Source="$(var.SnagitJiraOutputAccessory.TargetDir)\Atlassian.Jira.dll" />
+                <File Source="$(var.SnagitJiraOutputAccessory.TargetDir)\Atlassian.Jira.xml" />
+                <File Source="$(var.SnagitJiraOutputAccessory.TargetDir)\Jira.ico" />
+                <File Source="$(var.SnagitJiraOutputAccessory.TargetDir)\Newtonsoft.Json.dll" />
+                <File Source="$(var.SnagitJiraOutputAccessory.TargetDir)\Package.xml" />
+                <File Id="SnagitJiraOutputAccessoryDll" Source="$(var.SnagitJiraOutputAccessory.TargetDir)\SnagitJiraOutputAccessory.dll" KeyPath="yes" />
+                <File Source="$(var.SnagitJiraOutputAccessory.TargetDir)\SnagitJiraOutputAccessory.Output.xml" />
+
+                <Class Id="{55A50CAA-D9E3-4239-8B02-D6D2A396F4AF}" Context="InprocServer32" Description="SnagitJiraOutputAccessory.Package" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="SnagitJiraOutputAccessory.Package" Description="SnagitJiraOutputAccessory.Package" />
+                </Class>
+                <Class Id="{D3B2FCA3-7A2C-4AF9-86D4-2E542118E8F8}" Context="InprocServer32" Description="SnagitJiraOutputAccessory.SnagitJiraOutputButton" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="SnagitJiraOutputAccessory.SnagitJiraOutputButton" Description="SnagitJiraOutputAccessory.SnagitJiraOutputButton" />
+                </Class>
+
+                <RegistryValue Root="HKCR" Key="CLSID\{55A50CAA-D9E3-4239-8B02-D6D2A396F4AF}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{55A50CAA-D9E3-4239-8B02-D6D2A396F4AF}\InprocServer32\$(var.ProductVersion)" Name="Class" Value="SnagitJiraOutputAccessory.Package" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{55A50CAA-D9E3-4239-8B02-D6D2A396F4AF}\InprocServer32\$(var.ProductVersion)" Name="Assembly" Value="SnagitJiraOutputAccessory, Version=$(var.ProductVersion), Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{55A50CAA-D9E3-4239-8B02-D6D2A396F4AF}\InprocServer32\$(var.ProductVersion)" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{55A50CAA-D9E3-4239-8B02-D6D2A396F4AF}\InprocServer32\$(var.ProductVersion)" Name="CodeBase" Value="file:///[#SnagitJiraOutputAccessoryDll]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{55A50CAA-D9E3-4239-8B02-D6D2A396F4AF}\InprocServer32" Name="Class" Value="SnagitJiraOutputAccessory.Package" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{55A50CAA-D9E3-4239-8B02-D6D2A396F4AF}\InprocServer32" Name="Assembly" Value="SnagitJiraOutputAccessory, Version=$(var.ProductVersion), Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{55A50CAA-D9E3-4239-8B02-D6D2A396F4AF}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{55A50CAA-D9E3-4239-8B02-D6D2A396F4AF}\InprocServer32" Name="CodeBase" Value="file:///[#SnagitJiraOutputAccessoryDll]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{D3B2FCA3-7A2C-4AF9-86D4-2E542118E8F8}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{D3B2FCA3-7A2C-4AF9-86D4-2E542118E8F8}\InprocServer32\$(var.ProductVersion)" Name="Class" Value="SnagitJiraOutputAccessory.SnagitJiraOutputButton" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{D3B2FCA3-7A2C-4AF9-86D4-2E542118E8F8}\InprocServer32\$(var.ProductVersion)" Name="Assembly" Value="SnagitJiraOutputAccessory, Version=$(var.ProductVersion), Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{D3B2FCA3-7A2C-4AF9-86D4-2E542118E8F8}\InprocServer32\$(var.ProductVersion)" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{D3B2FCA3-7A2C-4AF9-86D4-2E542118E8F8}\InprocServer32\$(var.ProductVersion)" Name="CodeBase" Value="file:///[#SnagitJiraOutputAccessoryDll]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{D3B2FCA3-7A2C-4AF9-86D4-2E542118E8F8}\InprocServer32" Name="Class" Value="SnagitJiraOutputAccessory.SnagitJiraOutputButton" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{D3B2FCA3-7A2C-4AF9-86D4-2E542118E8F8}\InprocServer32" Name="Assembly" Value="SnagitJiraOutputAccessory, Version=$(var.ProductVersion), Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{D3B2FCA3-7A2C-4AF9-86D4-2E542118E8F8}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{D3B2FCA3-7A2C-4AF9-86D4-2E542118E8F8}\InprocServer32" Name="CodeBase" Value="file:///[#SnagitJiraOutputAccessoryDll]" Type="string" Action="write" />
+            </Component>
+        </ComponentGroup>
+    </Fragment>
+</Wix>
