@@ -26,9 +26,16 @@ Target "BuildSolution" (fun _ ->
 
 Target "Default" DoNothing
 
+Target "Release" ( fun _ ->
+    let msiDir = @".\SnagitJiraOutputAccessory.Setup\bin\Release"
+    let versionedFilename = msiDir @@ sprintf "SnagitJiraOutputAccessorySetup-%s.msi" buildVersion
+    Rename versionedFilename (msiDir @@ "SnagitJiraOutputAccessorySetup.msi")
+)
+
 "Clean"
     ==> "SetAssemblyInfo"
     ==> "BuildSolution"
     ==> "Default"
+    ==> "Release"
 
 RunTargetOrDefault "Default"
