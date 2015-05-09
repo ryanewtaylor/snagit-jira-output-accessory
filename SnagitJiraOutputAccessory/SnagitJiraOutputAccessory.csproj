@@ -132,9 +132,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>set installDir=%25LOCALAPPDATA%25\TechSmith\Snagit\Accessories\{55A50CAA-D9E3-4239-8B02-D6D2A396F4AF}
-if not exist %25installDir%25 md %25installDir%25
-xcopy /e /y /i $(TargetDir)*.* %25installDir%25\*.*</PostBuildEvent>
+    <PostBuildEvent>if $(ConfigurationName) == Debug xcopy /e /y /i $(TargetDir)*.* %25LOCALAPPDATA%25\TechSmith\Snagit\Accessories\{55A50CAA-D9E3-4239-8B02-D6D2A396F4AF}</PostBuildEvent>
   </PropertyGroup>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
