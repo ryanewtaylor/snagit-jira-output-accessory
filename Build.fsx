@@ -2,13 +2,15 @@
 
 open Fake
 open System.Text
+open System.IO
 
 let buildVersion = "0.1.0"
 let sha = Git.Information.getCurrentSHA1 @".\"
 
 Target "Clean" (fun _ ->
-    MSBuildWithDefaults "Clean" [".\SnagitJiraOutputAccessory.sln"]
-    |> Log "AppBuild-Output: "
+    let binDirs = Directory.GetDirectories(@".\", "bin", SearchOption.AllDirectories) |> Seq.toList
+    let objDirs = Directory.GetDirectories(@".\", "obj", SearchOption.AllDirectories) |> Seq.toList
+    CleanDirs (List.append binDirs objDirs)
 )
 
 Target "SetAssemblyInfo" (fun _ ->
