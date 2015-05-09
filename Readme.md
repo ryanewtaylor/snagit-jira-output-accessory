@@ -34,7 +34,7 @@ This project adds a new button to Snagit's Output Accessories to enable you to s
 
 *Note: This has only been tested and verified on Windows 7, with Snagit 11, and 
 .NET 4.5 and only on my machine. For a list of known issues and limitations (or
-to submit new ones see the [issues list](https://github.com/ryanewtaylor/snagit-jira-output-accessory/issues)*
+to submit new ones) see the [issues list](https://github.com/ryanewtaylor/snagit-jira-output-accessory/issues)*
 
 ## Contributing
 
