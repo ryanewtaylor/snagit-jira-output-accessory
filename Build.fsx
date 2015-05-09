@@ -6,6 +6,7 @@ open System.IO
 
 let buildVersion = "0.1.0"
 let sha = Git.Information.getCurrentSHA1 @".\"
+let currBranch = Git.Information.getBranchName @".\"
 
 Target "Clean" (fun _ ->
     let binDirs = Directory.GetDirectories(@".\", "bin", SearchOption.AllDirectories) |> Seq.toList
@@ -28,16 +29,25 @@ Target "BuildSolution" (fun _ ->
 
 Target "Default" DoNothing
 
-Target "Release" ( fun _ ->
+Target "PublishMsi" ( fun _ ->
     let msiDir = @".\SnagitJiraOutputAccessory.Setup\bin\Release"
     let versionedFilename = msiDir @@ sprintf "SnagitJiraOutputAccessorySetup-%s.msi" buildVersion
     Rename versionedFilename (msiDir @@ "SnagitJiraOutputAccessorySetup.msi")
 )
 
+Target "TagRelease" ( fun _ ->
+    Git.Branches.tag "" buildVersion
+    Git.Branches.pushTag "" "origin" buildVersion
+)
+
+Target "Release" DoNothing
+
 "Clean"
     ==> "SetAssemblyInfo"
     ==> "BuildSolution"
     ==> "Default"
+    =?> ("PublishMsi", currBranch = "master")
+    =?> ("TagRelease", currBranch = "master")
     ==> "Release"
 
 RunTargetOrDefault "Default"
